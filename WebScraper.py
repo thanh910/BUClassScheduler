@@ -9,36 +9,53 @@ Created on Sat Jul 16 03:29:19 2022
 
 import requests
 from bs4 import BeautifulSoup
-import Sections
 
-course = input("Enter a course: ")
-course = course.lower().replace(" ", "")
+semester = input("Enter a semester (ex. Fall 2022): ")
+courseName = input("Enter a course (ex. CAS XX 123): ")
 
-URL = "https://www.bu.edu/phpbin/course-search/section/?t=" + course + "&semester=2022-FALL&return=%2Fphpbin%2Fcourse-search%2Fsearch.php%3Fpage%3Dw0%26pagesize%3D10%26adv%3D1%26nolog%3D%26search_adv_all%3DCAS%2BCS%2B237%26yearsem_adv%3D2022-FALL%26credits%3D%2A%26pathway%3D%26hub_match%3Dall"
+semester = semester.replace(" ", "+")
+courseName = courseName.upper().split(" ")
+
+
+URL = "https://www.bu.edu/link/bin/uiscgi_studentlink.pl/1658458219?ModuleName=univschr.pl&SearchOption" + \
+    "Desc=Class+Number&SearchOptionCd=S&KeySem=20233&ViewSem=" + semester + \
+    "&College=" + courseName[0] + "&Dept=" + courseName[1] + "&Course=" + courseName[2] + "&Section="
+    
 page = requests.get(URL)
-
 soup = BeautifulSoup(page.content, "html.parser")
-results = soup.find_all(class_="first-row")
 
+for linebreak in soup.find_all('br'):
+    linebreak.replace_with("\n")
 
-classes = []
-for result in results:
-    Section = result.find_all("td")
-    section = []
+results = soup.find_all("font")
+
+sections =[]
+
+for line in results:
+    data = []
     
-    for element in Section:
-        section += [element.text.strip()]
-        
-    if section != '':
-        classes += [section]
-
-
-classes = classes[1:]
-courses = []
-
-
-for data in classes:
-    courses += [Sections.Section(data[0], data[2], data[3], data[4], data[5], data[7])]
+    for element in line:
+        if element.text.strip() != "":
+            data += [element.text.strip().replace("\xa0", " ")]
     
-print(courses)
+    while("" in data):
+        data.remove("")
     
+    sections += [data]
+
+sections = [x for x in sections if x]
+allSections = []
+
+for row in range(len(sections)):
+    temp = []
+    if len(sections[row]) == 2 and sections[row-1][0][0:9].replace(" ", "") == "".join(courseName):
+        temp += sections[row-1]
+        for i in range(10):
+            if(sections[row + i] != []):
+                temp += sections[row + i]
+    allSections += [temp]
+
+allSections = [x for x in allSections if x]
+
+for x in allSections:
+    print(allSections)
