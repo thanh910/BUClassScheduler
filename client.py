@@ -7,11 +7,11 @@ start_time = time.time()
 
 #semester = input("Enter a semester (ex. Fall 2022): ")
 semester = 'FALL 2022'
-#`numCourses = int(input("How many courses are you taking? "))
+numCourses = int(input("How many courses are you taking? "))
 
-courseList = ["CAS CS 210", "CAS CS 237", "CAS BI 107", "CAS LC 211"]
-"""for i in range(numCourses):
-    courseList += [str(input("Enter a course (ex. CAS XX 123): "))]"""
+courseList = []
+for i in range(numCourses):
+    courseList += [str(input("Enter a course (ex. CAS XX 123): "))]
 
 allCourses = generateCourses(courseList, semester)
 
