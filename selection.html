@@ -1,0 +1,42 @@
+{% for course in data %}
+    <form action="{{url_for('image')}}" method="POST">
+        <table class="table">
+            
+            <thead>
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Class</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Instructor</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Building</th>
+                    <th scope="col">Room</th>
+                    <th scope="col">Days</th>
+                    <th scope="col">Start</th>
+                    <th scope="col">Stop</th>
+                    <th scope="col">Notes</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for row in course %}
+                    <tr>
+                        <td>
+                            <label for="section-select"> <input type="radio" oninput=Submit() id=course name=course value={{row}}></label>
+                        </td>   
+                        <td>{{row['Class']}}</td>
+                        <td>{{row['Title']}}</td>
+                        <td>{{row['Instructor']}}</td>
+                        <td>{{row['Type']}}</td>
+                        <td>{{row['Bld']}}</td>
+                        <td>{{row['Room']}}</td>
+                        <td>{{row['Days']}}</td>
+                        <td>{{row['Start']}}</td>
+                        <td>{{row['Stop']}}</td>
+                        <td>{{row['Notes']}}</td> 
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </form>
+{% endfor %}
