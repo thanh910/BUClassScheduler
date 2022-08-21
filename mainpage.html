@@ -3,12 +3,20 @@
 <html>
 
     <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title></title>
         <link rel="stylesheet" href="css/style.css">
+        
     </head>
-
+    <main>
     <body>
-        <h1 class="website-title">BU Course Scheduling Assistant</h1>
+        <header>
+        <div class="website-title">
+            <h1>BU Course Scheduling Assistant</h1>
+            <p><em>Plan out your ideal schedule now!</em></p>
+            </div>
+        </header>
 
         <form class="course-input" method="POST" action="/course">
             <input type="radio" id="fall" name="semester" value="FALL 2022">
@@ -38,6 +46,7 @@
             <input type="submit" id="submit-course">
             
         </form>
+        </main>
 
     </body>
   
