@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{% block title %} Section Selection {% endblock %}</h1>
+
+    {% block schedule %} {% endblock %}
+
+    {% for course in data %}
+        <form method="POST">
+            <table class="table-striped table-bordered">
+                
+                <thead>
+                    <tr class="table-dark">
+                        <th scope="col"></th>
+                        <th scope="col">Class</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Instructor</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Building</th>
+                        <th scope="col">Room</th>
+                        <th scope="col">Days</th>
+                        <th scope="col">Start</th>
+                        <th scope="col">Stop</th>
+                        <th scope="col">Notes</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <div class="form-check">
+                        {% for row in course.lectures.to_dict(orient='records') %}
+                            <tr>
+                                <td>
+                                    <label class="form-check-label" for=course+"lecture"> <input type="radio" class="form-check-input btn btn-secondary" oninput=update() name=course+"lecture" value={{row['Class']}}></label>
+                                </td>   
+                                <td>{{row['Class']}}</td>
+                                <td>{{row['Title']}}</td>
+                                <td>{{row['Instructor']}}</td>
+                                <td>{{row['Type']}}</td>
+                                <td>{{row['Bld']}}</td>
+                                <td>{{row['Room']}}</td>
+                                <td>{{row['Days']}}</td>
+                                <td>{{row['Start']}}</td>
+                                <td>{{row['Stop']}}</td>
+                                <td>{{row['Notes']}}</td> 
+                            </tr>
+                        {% endfor %}
+                    </div>
+
+                    <div class="form-check">
+                        {% for row in course.discLabs.to_dict(orient='records') %}
+                            <tr>
+                                <td>
+                                    <label class="form-check-label" for=course+"discussion"> <input type="radio" class="form-check-input btn btn-secondary" oninput=update() name=course+"discussion" value={{row['Class']}} name=course></label>
+                                </td>   
+                                <td>{{row['Class']}}</td>
+                                <td>{{row['Title']}}</td>
+                                <td>{{row['Instructor']}}</td>
+                                <td>{{row['Type']}}</td>
+                                <td>{{row['Bld']}}</td>
+                                <td>{{row['Room']}}</td>
+                                <td>{{row['Days']}}</td>
+                                <td>{{row['Start']}}</td>
+                                <td>{{row['Stop']}}</td>
+                                <td>{{row['Notes']}}</td> 
+                            </tr>
+                        {% endfor %}
+                    </div>
+                </tbody>
+            </table>
+        </form>
+    {% endfor %}
+{% endblock %}

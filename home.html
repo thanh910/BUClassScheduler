@@ -1,0 +1,48 @@
+{% extends 'base.html'%}
+
+{%block content%}
+
+    <div class="mx-auto">
+        
+        <header>
+            <h1 class="website-title text-center">BU Course Scheduling Assistant</h1>
+        </header>
+
+        <form class="course-input" method="POST" action="/section-selection">
+            <div class="form-floating mb-3">
+                <input class="btn btn-danger" type="radio" id="fall" name="semester" value="FALL 2022">
+                <label for="fall">Fall 2022</label>
+
+                <input class="btn btn-danger"type="radio" id="spring" name="semester" value="SPRING 2022">
+                <label for="fall">Spring 2023</label>
+
+                <br>
+
+                <label for="course-search1">1st Course
+                    <input type="textarea" class="form-control form-control-lg" placeholder="Enter course (Example: CAS XX 123)" id="course-search1" name="course-search1">
+                </label>
+                <br>
+
+                <label for="course-search2">2nd Course
+                    <input type="textarea" class="form-control form-control-lg" placeholder="Enter course (Example: CAS XX 123)" id="course-search2" name="course-search2">
+                </label>
+                <br>
+                
+                <label for="course-search3">3rd Course
+                    <input type="textarea" class="form-control form-control-lg" placeholder="Enter course (Example: CAS XX 123)" id="course-search3" name="course-search3">
+                </label>
+                <br>
+
+                <label for="course-search4">4th Course
+                <input type="textarea" class="form-control form-control-lg" placeholder="Enter course (Example: CAS XX 123)" id="course-search4" name="course-search4">
+                </label>
+                <br>
+
+                <input class="btn btn-danger" type="submit" id="submit-course">
+            </div>
+            
+        </form>
+    </div>
+
+  {% endblock %}
+
