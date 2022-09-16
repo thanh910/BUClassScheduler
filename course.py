@@ -1,20 +1,20 @@
 from WebScraper import *
 from collections.abc import Iterable
-from operator import attrgetter
 from section import *
 
 class course:
     
     def __init__(self, semester, courseName):
+        self.title = courseName
         self.courseName = courseName.upper()
         self.sections = Webscraper(semester, self.courseName)
         self.title = self.sections['Title'].iloc[0]
         self.numSections = self.sections.shape[0]
         self.lectures = self.sections[self.sections["Type"].str.contains("Lecture")]
         self.numLectures = self.lectures.shape[0]
-        self.discLabs = self.sections[~self.sections["Type"].str.contains("Lecture")]
+        self.discLabs = self.sections[~(self.sections["Type"].str.contains("Lecture"))]
         self.numDiscLabs = self.discLabs.shape[0]
-        self.credits = self.sections['CrHrs'].max()
+        self.credits = self.sections['Credits'].max()
         self.instructors = self.lectures["Instructor"].unique()
     
         
@@ -52,7 +52,8 @@ class course:
 def generateCourses(list, semester):
     result = []
     for i in list:
-        result += [course(semester, i)]
+        if i != "":
+            result += [course(semester, i)]
 
     return result
 

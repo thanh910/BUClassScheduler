@@ -1,4 +1,3 @@
-
 from ssl import DefaultVerifyPaths
 import requests
 import lxml.html as lh
@@ -117,20 +116,18 @@ def Webscraper(semester, courseName):
     df = df[df["Class"].str.contains("|".join(courseNameString))]
     
     #separating title and instructor into two columms
-    base = pd.DataFrame(df['Title/Instructor'].values.tolist()).iloc[:, [0, 1]]
-    base = base.rename(index = lambda x: x + 1)
-    df[['Title/Instructor', 'Instructor']] = base
-    df = df.rename({'Title/Instructor': 'Title'}, axis=1)
+    df["Title"] = df['Title/Instructor'].map(lambda x: x[0])
+    df["Instructor"] = df['Title/Instructor'].map(lambda x: x[1])
     df = df.rename({'Day': 'Days'}, axis=1)
-    
- 
+    df = df.rename({'CrHrs': 'Credits'}, axis=1)
     
     #deleting unneccessary columns
     df.drop('', axis=1, inplace=True)
     df.drop('OpenSeats', axis=1, inplace=True)
+    df.drop('Title/Instructor', axis=1, inplace=True)
     
     #reassigning display order
-    df = df[['Class', 'Title', 'Instructor', 'CrHrs', 'Type', 'Bld', 'Room', 'Days', 'Start', 'Stop', 'Notes']]
+    df = df[['Class', 'Title', 'Instructor', 'Credits', 'Type', 'Bld', 'Room', 'Days', 'Start', 'Stop', 'Notes']]
     df['Start'] = df['Start'].map(lambda x: convertToTime(x))
     df['Stop'] = df['Stop'].map(lambda x: convertToTime(x))
     df.set_index('Class', inplace=True)
@@ -148,9 +145,5 @@ def convertToTime(entry):
     else:
         return None
     
-
-
-
-
 
 
