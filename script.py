@@ -15,9 +15,11 @@ while True:
     try:
         prevSection = prevCourse.pullSection("B1")
         newSection = newCourse.pullSection("B1")
+        prevSection2 = prevCourse.pullSection("C1")
+        newSection2 = newCourse.pullSection("C1")
         
 
-        if prevSection == newSection:
+        if prevSection == newSection and prevSection2 == newSection2:
             continue
         
         else:
