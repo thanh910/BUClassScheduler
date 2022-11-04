@@ -19,7 +19,7 @@ while True:
         newSection2 = newCourse.pullSection(newCourse.findIndex("C1"))
         
 
-        if prevSection == newSection and prevSection2 == newSection2:
+        if prevSection.openseats == newSection.openseats and prevSection2.openseats == newSection2.openseats:
             continue
         
         else:
