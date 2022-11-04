@@ -25,15 +25,15 @@ while True:
         else:
                 msg = EmailMessage()
                 msg.set_content()
-                msg['From'] = 'sirwingwong8@gmail.com'
+                msg['From'] = 'autowongbot@gmail.com'
                 msg['To'] = 'thanh910@bu.edu'
                 msg['Subject'] = 'Open Seat Count Update'
-                fromaddr = 'sirwingwong8@gmail.com'
+                fromaddr = 'autowongbot@gmail.com'
                 toaddrs = ['thanh910@bu.edu']
                 server = smtplib.SMTP('smtp.gmail.com', 587)
                 server.starttls()
                 #server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
-                server.login('sirwingwong8@gmail.com', 'Thanh2003')
+                server.login('autowongbot@gmail.com', 'rttymsdwseggqyrf')
                 server.send_message(msg)
                 server.quit()
                 response = urlopen(url).read()
@@ -44,15 +44,15 @@ while True:
 
         msg = EmailMessage()
         msg.set_content(url)
-        msg['From'] = 'sirwingwong8@gmail.com'
+        msg['From'] = 'autowongbot@gmail.com'
         msg['To'] = 'thanh910@bu.edu'
         msg['Subject'] = 'PROGRAM FAILURE'
-        fromaddr = 'sirwingwong8@gmail.com'
+        fromaddr = 'autowongbot@gmail.com'
         toaddrs = ['thanh910@bu.edu']
         server = smtplib.SMTP('smtp.gmail.com', 587)
         server.starttls()
         #server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
-        server.login('sirwingwong8@gmail.com', 'Thanh2003')
+        server.login('autowongbot@gmail.com', 'rttymsdwseggqyrf')
         server.send_message(msg)
         server.quit()
 
