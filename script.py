@@ -13,10 +13,10 @@ while True:
     newCourse = course("SPRING 2023", "CAS LC 212")
 
     try:
-        prevSection = prevCourse.pullSection("B1")
-        newSection = newCourse.pullSection("B1")
-        prevSection2 = prevCourse.pullSection("C1")
-        newSection2 = newCourse.pullSection("C1")
+        prevSection = prevCourse.pullSection(prevCourse.findIndex("B1"))
+        newSection = newCourse.pullSection(newCourse.findIndex("B1"))
+        prevSection2 = prevCourse.pullSection(prevCourse.findIndex("C1"))
+        newSection2 = newCourse.pullSection(newCourse.findIndex("C1"))
         
 
         if prevSection == newSection and prevSection2 == newSection2:
