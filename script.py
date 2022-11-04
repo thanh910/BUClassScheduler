@@ -24,7 +24,7 @@ while True:
         
         else:
                 msg = EmailMessage()
-                msg.set_content()
+                msg.set_content(url)
                 msg['From'] = 'autowongbot@gmail.com'
                 msg['To'] = 'thanh910@bu.edu'
                 msg['Subject'] = 'Open Seat Count Update'
