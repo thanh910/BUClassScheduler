@@ -1,22 +1,23 @@
-import requests
 import time
 import smtplib
 from email.message import EmailMessage
-import hashlib
 from urllib.request import urlopen
 from course import *
 
 while True:
     url = "https://www.bu.edu/link/bin/uiscgi_studentlink.pl/1667504839?ModuleName=univschr.pl&SearchOptionDesc=Class+Number&SearchOptionCd=S&KeySem=20234&ViewSem=Spring+2023&College=CAS&Dept=LC&Course=212&Section="
-    prevCourse = course("SPRING 2023", "CAS LC 212")
-    time.sleep(60)
-    newCourse = course("SPRING 2023", "CAS LC 212")
+    prevCourse = course("SPRING 2023", "CAS CS 330")
+    prevCourse2= course("SPRING 2023", "CAS CS 411")
+    time.sleep(55)
+    newCourse = course("SPRING 2023", "CAS CS 330")
+    newCourse2= course("SPRING 2023", "CAS CS 411")
 
     try:
-        prevSection = prevCourse.pullSection(prevCourse.findIndex("B1"))
-        newSection = newCourse.pullSection(newCourse.findIndex("B1"))
-        prevSection2 = prevCourse.pullSection(prevCourse.findIndex("C1"))
-        newSection2 = newCourse.pullSection(newCourse.findIndex("C1"))
+        prevSection = prevCourse.pullSection(prevCourse.findIndex("A1"))
+        newSection = newCourse.pullSection(newCourse.findIndex("A1"))
+        
+        prevSection2 = prevCourse2.pullSection(prevCourse2.findIndex("A1"))
+        newSection2 = newCourse2.pullSection(newCourse2.findIndex("A1"))
         
 
         if prevSection.openseats == newSection.openseats and prevSection2.openseats == newSection2.openseats:
@@ -37,11 +38,12 @@ while True:
                 server.send_message(msg)
                 server.quit()
                 response = urlopen(url).read()
-                time.sleep(240)
+                print("success")
                 continue
             
     except Exception as e:
 
+        print("fail")
         msg = EmailMessage()
         msg.set_content(url)
         msg['From'] = 'autowongbot@gmail.com'
